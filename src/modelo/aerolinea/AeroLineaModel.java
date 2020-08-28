@@ -24,14 +24,14 @@ public class AeroLineaModel {
             if(rs.next()){
                 lineas = new AeroLinea[rs.getInt("filas")];
             }
-            rs.close();
+
             
-            ps = conexion.prepareStatement("select nombre from empresa");
+            ps = conexion.prepareStatement("select id,nombre from empresa");
             rs = ps.executeQuery();
             
             int i = 0;
             while (rs.next()) {
-               lineas[i] = new AeroLinea(rs.getString("nombre"));
+               lineas[i] = new AeroLinea(rs.getInt("id"),rs.getString("nombre"));
                i++;
             }
             rs.close();

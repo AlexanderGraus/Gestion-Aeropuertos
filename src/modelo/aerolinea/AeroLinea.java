@@ -13,6 +13,10 @@ public class AeroLinea {
         
     }
 
+    public AeroLinea(int id, String nombre){
+        this.id = id;
+        this.nombre = nombre;
+    }
     public int getId(){
         return id;
     }
