@@ -37,7 +37,8 @@ public class AgregarAeropuerto {
             aeropuerto.setLineas(lineas);
             
             //hago la insercion en la tabla
-            JOptionPane.showMessageDialog(null, (AeropuertoModel.create(aeropuerto)) ? "Aeropuerto agregado con exito":"Error al ingresar el aeropuerto");
+            JOptionPane.showMessageDialog(null, (AeropuertoModel.create(aeropuerto)) ? 
+                    "Aeropuerto agregado con exito":"Error al ingresar el aeropuerto");
         });
 
     }

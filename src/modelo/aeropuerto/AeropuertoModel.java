@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ConexionBD;
@@ -52,40 +53,46 @@ public class AeropuertoModel extends ConexionBD {
     public static boolean create(Aeropuerto aeropuerto) {
         Connection conexion = getConnection();
         boolean estado = true;
-        int res=0;
+        int res = 0;
         try {
-            ps = conexion.prepareStatement("insert into aeropuerto (nombre,ciudad,pais) values (?,?,?)");
+            ps = conexion.prepareStatement("insert into aeropuerto (nombre,ciudad,pais) values (?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            
             ps.setString(1, aeropuerto.getNombre());
             ps.setString(2, aeropuerto.getCiudad());
             ps.setString(3, aeropuerto.getPais());
 
             res = ps.executeUpdate();
-            
-            System.out.println(res);
-            
-            ps = conexion.prepareStatement("select id from aeropuerto where nombre = ?");
-            ps.setString(1, aeropuerto.getNombre());
-            rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                aeropuerto.setId(rs.getInt("id"));
-                for (AeroLinea linea : aeropuerto.getLineas()) {
-                    ps = conexion.prepareStatement("insert into `union_empresa_aeropuerto` (`idEmpresa`,`idAeropuerto`) values (?,?)");
-                    System.out.println(linea.getId());
-                    ps.setInt(1, linea.getId());
-                    System.out.println(aeropuerto.getId());
-                    ps.setInt(2, aeropuerto.getId());
-                    
-                    res = ps.executeUpdate();
-                    estado = res>0;
 
+            if (res > 0) {
+                
+                ResultSet insertId = ps.getGeneratedKeys();
+
+                if (insertId.next()) {
+                    //me guardo el id del ultimo aeropuerto insertado
+                    aeropuerto.setId(insertId.getInt(1));
+                    
+                    //inserto todas las aerolineas de ese aeropuerto
+                    for (AeroLinea linea : aeropuerto.getLineas()) {
+                        
+                        ps = conexion.prepareStatement("insert into `union_empresa_aeropuerto` (`idEmpresa`,`idAeropuerto`) values (?,?)");
+                        System.out.println(linea.getId());
+                        ps.setInt(1, linea.getId());
+                        System.out.println(aeropuerto.getId());
+                        ps.setInt(2, aeropuerto.getId());
+
+                        res = ps.executeUpdate();
+                        estado = res > 0;
+
+                    }
                 }
+                ps.close();
             }
-            ps.close();
+
         } catch (SQLException ex) {
             System.err.println("SQL Error: " + ex);
             estado = false;
-            
+
         } finally {
             try {
                 conexion.close();
