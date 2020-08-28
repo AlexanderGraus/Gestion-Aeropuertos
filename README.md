@@ -4,7 +4,6 @@
 
 <p>La idea es que este proyecto es practicar los suiguientes conceptos de la programacion en Java:</p>
 
-<h2>Funciones del sitio:</h2>
 <ul>
 	<li>Programacion orientada a objetos</li>
 	<li>Interfaces graficas de usuario</li>
