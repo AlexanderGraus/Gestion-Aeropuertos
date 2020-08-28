@@ -27,7 +27,7 @@ public class AeropuertoModel extends ConexionBD {
             }
             rs.close();
 
-            ps = conexion.prepareStatement("select nombre,ciudad,pais from aeropuerto");
+            ps = conexion.prepareStatement("SELECT nombre,ciudad,pais from aeropuerto ORDER BY nombre ASC");
             rs = ps.executeQuery();
 
             int i = 0;
