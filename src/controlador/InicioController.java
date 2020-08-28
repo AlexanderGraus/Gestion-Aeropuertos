@@ -1,6 +1,8 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
@@ -17,7 +19,7 @@ public class InicioController {
         oyentes();
     }
 
-    private void cargarAeropuertos() {
+    protected void cargarAeropuertos() {
         Aeropuerto[] aeros;
 
             //traigo los aeropuertos de la BD
@@ -41,7 +43,7 @@ public class InicioController {
         vistaInicio.bAgregar.addActionListener((ActionEvent ae) -> {
             new AgregarAeropuerto(vistaInicio);
         });
-            
         
+
     }
 }

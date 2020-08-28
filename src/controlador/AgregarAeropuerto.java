@@ -1,4 +1,5 @@
 package controlador;
+import static gestor_aeropuertos.Gestor_Aeropuertos.controlInicio;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -39,6 +40,11 @@ public class AgregarAeropuerto {
             //hago la insercion en la tabla
             JOptionPane.showMessageDialog(null, (AeropuertoModel.create(aeropuerto)) ? 
                     "Aeropuerto agregado con exito":"Error al ingresar el aeropuerto");
+            
+            vista.dispose();
+            
+            //recargo los aeropuertos para que aparezca en la tabla la nueva insercion
+            controlInicio.cargarAeropuertos();
         });
 
     }

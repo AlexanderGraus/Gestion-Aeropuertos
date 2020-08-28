@@ -76,9 +76,7 @@ public class AeropuertoModel extends ConexionBD {
                     for (AeroLinea linea : aeropuerto.getLineas()) {
                         
                         ps = conexion.prepareStatement("insert into `union_empresa_aeropuerto` (`idEmpresa`,`idAeropuerto`) values (?,?)");
-                        System.out.println(linea.getId());
                         ps.setInt(1, linea.getId());
-                        System.out.println(aeropuerto.getId());
                         ps.setInt(2, aeropuerto.getId());
 
                         res = ps.executeUpdate();

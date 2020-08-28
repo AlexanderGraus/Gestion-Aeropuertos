@@ -11,11 +11,11 @@ import controlador.InicioController;
  */
 public class Gestor_Aeropuertos {
 
-    /**
-     * @param args the command line arguments
-     */
+
+    public static InicioController controlInicio;
+    
     public static void main(String[] args) {
-        new InicioController();
+        controlInicio = new InicioController();
     }
     
 }
