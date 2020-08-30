@@ -161,7 +161,7 @@ public class AeropuertoModel extends ConexionBD {
         return estado;
     }
     
-    public static boolean deleteByNomrbe(String nombre){
+    public static boolean deleteByNombre(String nombre){
         Connection conexion = null;
         boolean estado = true;
         try{
