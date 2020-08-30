@@ -50,6 +50,67 @@ public class AeropuertoModel extends ConexionBD {
         return aeros;
     }
 
+    public static Aeropuerto getAeropuertoByNombre(String nombre) {
+        Aeropuerto aeropuerto = new Aeropuerto();
+        Connection conexion = null;
+        AeroLinea lineas[] = null;
+
+        try {
+            conexion = getConnection();
+
+            //pregunto primero cuantas aerolineas tiene ese aeropuerto
+            ps = conexion.prepareStatement("SELECT COUNT(e.id) AS filas FROM aeropuerto as a "
+                    + "INNER JOIN union_empresa_aeropuerto AS uea ON a.id = uea.idAeropuerto "
+                    + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND a.nombre = ?");
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                //creo el vector con tantos lugares como aerolineas
+                int nLineas = rs.getInt("filas");
+                lineas = new AeroLinea[nLineas];
+
+                //hago la consulta para todos los datos de ese aeropuerto
+                ps = conexion.prepareStatement("SELECT a.id, a.ciudad, a.pais,"
+                        + " e.id as idLinea, e.nombre as nombreLinea FROM aeropuerto AS a"
+                        + "INNER JOIN union_empresa_aeropuerto AS uea ON a.id = uea.idAeropuerto"
+                        + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND a.id = ?");
+                ps.setString(1, nombre);
+                rs = ps.executeQuery();
+                
+                int i=0;
+                while(rs.next()){
+                    if(i==0){
+                        aeropuerto.setId(rs.getInt("id"));
+                        aeropuerto.setNombre(nombre);
+                        aeropuerto.setCiudad(rs.getString("ciudad"));
+                        aeropuerto.setPais(rs.getString("pais"));
+                        lineas[0].setId(rs.getInt("idLinea"));
+                        lineas[0].setNombre(rs.getString("nombreLinea"));
+                        
+                        i++;
+                    }else{
+                        lineas[i].setId(rs.getInt("idLinea"));
+                        lineas[i].setNombre(rs.getString("nombreLinea"));
+                        i++;
+                        
+                    }
+                }
+                ps.close();
+                aeropuerto.setLineas(lineas);
+            }
+        } catch (SQLException ex) {
+            System.err.println("SQL Error: " + ex);
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: " + ex);
+            }
+        }
+        return aeropuerto;
+    }
+
     public static boolean create(Aeropuerto aeropuerto) {
         Connection conexion = getConnection();
         boolean estado = true;
@@ -57,7 +118,7 @@ public class AeropuertoModel extends ConexionBD {
         try {
             ps = conexion.prepareStatement("insert into aeropuerto (nombre,ciudad,pais) values (?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setString(1, aeropuerto.getNombre());
             ps.setString(2, aeropuerto.getCiudad());
             ps.setString(3, aeropuerto.getPais());
@@ -65,16 +126,16 @@ public class AeropuertoModel extends ConexionBD {
             res = ps.executeUpdate();
 
             if (res > 0) {
-                
+
                 ResultSet insertId = ps.getGeneratedKeys();
 
                 if (insertId.next()) {
                     //me guardo el id del ultimo aeropuerto insertado
                     aeropuerto.setId(insertId.getInt(1));
-                    
+
                     //inserto todas las aerolineas de ese aeropuerto
                     for (AeroLinea linea : aeropuerto.getLineas()) {
-                        
+
                         ps = conexion.prepareStatement("insert into `union_empresa_aeropuerto` (`idEmpresa`,`idAeropuerto`) values (?,?)");
                         ps.setInt(1, linea.getId());
                         ps.setInt(2, aeropuerto.getId());
