@@ -9,12 +9,14 @@ import modelo.aeropuerto.AeropuertoModel;
 import vista.Inicio;
 
 public class InicioController {
+
     private Inicio vistaInicio;
-    public InicioController(){
+
+    public InicioController() {
         vistaInicio = new Inicio();
         vistaInicio.setVisible(true);
         vistaInicio.setLocationRelativeTo(null);
-        
+
         cargarAeropuertos();
         oyentes();
     }
@@ -22,20 +24,26 @@ public class InicioController {
     protected void cargarAeropuertos() {
         Aeropuerto[] aeros;
 
-            //traigo los aeropuertos de la BD
-            aeros = AeropuertoModel.getAeropuertos();
-            
-            //creo un modelo para la tabla
-            DefaultTableModel modeloTabla = new DefaultTableModel();
-            
-            modeloTabla.addColumn("Nombre del Aeropuerto");
-            modeloTabla.addColumn("Ciudad");
-            modeloTabla.addColumn("Pais");
-            for (Aeropuerto aero : aeros) {
-                modeloTabla.addRow(aero.imprimir());
+        //traigo los aeropuertos de la BD
+        aeros = AeropuertoModel.getAeropuertos();
+
+        //creo un modelo para la tabla
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //no se puede editar la tabla
+                return false;
             }
-            vistaInicio.tablaAero.setModel(modeloTabla);
-            
+        };
+
+        modeloTabla.addColumn("Nombre del Aeropuerto");
+        modeloTabla.addColumn("Ciudad");
+        modeloTabla.addColumn("Pais");
+        for (Aeropuerto aero : aeros) {
+            modeloTabla.addRow(aero.imprimir());
+        }
+        vistaInicio.tablaAero.setModel(modeloTabla);
 
     }
 
@@ -43,12 +51,12 @@ public class InicioController {
         vistaInicio.bAgregar.addActionListener((ActionEvent ae) -> {
             new AgregarAeropuerto(vistaInicio);
         });
-        
+
         vistaInicio.bDatos.addActionListener((ActionEvent ae) -> {
             //guardar el aeropuerto seleccionado
             int fila = vistaInicio.tablaAero.getSelectedRow();
-            String nombre = (String)vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
-            new VerAeropuerto(vistaInicio,nombre);
+            String nombre = (String) vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
+            new VerAeropuerto(vistaInicio, nombre);
         });
 
     }
