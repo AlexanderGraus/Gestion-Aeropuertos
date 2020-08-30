@@ -200,7 +200,7 @@ public class AgregarAeropuerto extends javax.swing.JDialog {
     public javax.swing.JTextField cajaCiudad;
     public javax.swing.JTextField cajaNombre;
     public javax.swing.JTextField cajaPais;
-    private javax.swing.JLabel etiqTitulo;
+    public javax.swing.JLabel etiqTitulo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
