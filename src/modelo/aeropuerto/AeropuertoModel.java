@@ -53,28 +53,29 @@ public class AeropuertoModel extends ConexionBD {
     public static Aeropuerto getAeropuertoByNombre(String nombre) {
         Aeropuerto aeropuerto = new Aeropuerto();
         Connection conexion = null;
-        AeroLinea lineas[] = null;
+        AeroLinea[] lineas= null;
 
         try {
             conexion = getConnection();
 
             //pregunto primero cuantas aerolineas tiene ese aeropuerto
-            ps = conexion.prepareStatement("SELECT COUNT(e.id) AS filas FROM aeropuerto as a "
-                    + "INNER JOIN union_empresa_aeropuerto AS uea ON a.id = uea.idAeropuerto "
-                    + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND a.nombre = ?");
+            ps = conexion.prepareStatement("SELECT COUNT(e.id) AS filas FROM aeropuerto "
+                    + "INNER JOIN union_empresa_aeropuerto AS uea ON aeropuerto.id = uea.idAeropuerto "
+                    + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND aeropuerto.nombre = ?");
             ps.setString(1, nombre);
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 //creo el vector con tantos lugares como aerolineas
                 int nLineas = rs.getInt("filas");
+                
                 lineas = new AeroLinea[nLineas];
-
+                
                 //hago la consulta para todos los datos de ese aeropuerto
                 ps = conexion.prepareStatement("SELECT a.id, a.ciudad, a.pais,"
-                        + " e.id as idLinea, e.nombre as nombreLinea FROM aeropuerto AS a"
-                        + "INNER JOIN union_empresa_aeropuerto AS uea ON a.id = uea.idAeropuerto"
-                        + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND a.id = ?");
+                        + " e.id as idLinea, e.nombre as nombreLinea FROM aeropuerto AS a "
+                        + "INNER JOIN union_empresa_aeropuerto AS uea ON a.id = uea.idAeropuerto "
+                        + "INNER JOIN empresa AS e ON uea.idEmpresa= e.id AND a.nombre = ?");
                 ps.setString(1, nombre);
                 rs = ps.executeQuery();
                 
@@ -85,13 +86,11 @@ public class AeropuertoModel extends ConexionBD {
                         aeropuerto.setNombre(nombre);
                         aeropuerto.setCiudad(rs.getString("ciudad"));
                         aeropuerto.setPais(rs.getString("pais"));
-                        lineas[0].setId(rs.getInt("idLinea"));
-                        lineas[0].setNombre(rs.getString("nombreLinea"));
+                        lineas[i] = new AeroLinea(rs.getInt("idLinea"),rs.getString("nombreLinea"));
                         
                         i++;
                     }else{
-                        lineas[i].setId(rs.getInt("idLinea"));
-                        lineas[i].setNombre(rs.getString("nombreLinea"));
+                        lineas[i] = new AeroLinea(rs.getInt("idLinea"),rs.getString("nombreLinea"));
                         i++;
                         
                     }
