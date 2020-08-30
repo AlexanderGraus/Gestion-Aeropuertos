@@ -160,4 +160,27 @@ public class AeropuertoModel extends ConexionBD {
         }
         return estado;
     }
+    
+    public static boolean deleteByNomrbe(String nombre){
+        Connection conexion = null;
+        boolean estado = true;
+        try{
+            conexion = getConnection();
+            ps = conexion.prepareStatement("DELETE FROM aeropuerto WHERE nombre = ?");
+            ps.setString(1, nombre);
+            
+            int resultado = ps.executeUpdate();
+            estado = (resultado>0);
+        }catch(SQLException ex){
+            System.err.println("SQL Error: "+ex);
+            estado = false;
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: "+ex);
+            }
+        }
+        return estado;
+    }
 }
