@@ -45,7 +45,11 @@ public class InicioController {
         });
         
         vistaInicio.bDatos.addActionListener((ActionEvent ae) -> {
-            new VerAeropuerto(vistaInicio);
+            //guardar el aeropuerto seleccionado
+            int fila = vistaInicio.tablaAero.getSelectedRow();
+            String nombre = (String)vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
+            System.out.println(nombre);
+            new VerAeropuerto(vistaInicio,nombre);
         });
 
     }
