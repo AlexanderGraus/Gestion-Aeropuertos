@@ -44,6 +44,9 @@ public class InicioController {
             new AgregarAeropuerto(vistaInicio);
         });
         
+        vistaInicio.bDatos.addActionListener((ActionEvent ae) -> {
+            new VerAeropuerto(vistaInicio);
+        });
 
     }
 }
