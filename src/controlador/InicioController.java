@@ -1,8 +1,7 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
@@ -59,8 +58,11 @@ public class InicioController {
             new VerAeropuerto(vistaInicio, nombre);
         });
         
-        vistaInicio.bEditar.addActionListener((ActionEvent ae) ->{
-            new EliminarAeropuerto();
+        vistaInicio.bEliminar.addActionListener((ActionEvent ae) ->{
+            int fila = vistaInicio.tablaAero.getSelectedRow();
+            String nombre = (String) vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
+            new EliminarAeropuerto(nombre);
+            
         });
 
     }
