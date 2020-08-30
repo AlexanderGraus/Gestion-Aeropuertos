@@ -61,7 +61,7 @@ public class InicioController {
         vistaInicio.bEditar.addActionListener((ActionEvent ae) ->{
             int fila = vistaInicio.tablaAero.getSelectedRow();
             String nombre = (String) vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
-            new EditarAeropuerto(nombre);
+            new EditarAeropuerto(vistaInicio,nombre);
             
         });
         
