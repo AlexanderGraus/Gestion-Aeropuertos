@@ -58,6 +58,10 @@ public class InicioController {
             String nombre = (String) vistaInicio.tablaAero.getModel().getValueAt(fila, 0);
             new VerAeropuerto(vistaInicio, nombre);
         });
+        
+        vistaInicio.bEditar.addActionListener((ActionEvent ae) ->{
+            new EliminarAeropuerto();
+        });
 
     }
 }
