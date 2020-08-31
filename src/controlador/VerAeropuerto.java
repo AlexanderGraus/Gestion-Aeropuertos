@@ -26,8 +26,11 @@ public class VerAeropuerto {
         Aeropuerto aeropuerto = AeropuertoModel.getAeropuertoByNombre(nombre);
         
         vista.cajaNombre.setText(nombre);
+        vista.cajaNombre.setEditable(false);
         vista.cajaCiudad.setText(aeropuerto.getCiudad());
+        vista.cajaCiudad.setEditable(false);
         vista.cajaPais.setText(aeropuerto.getPais());
+        vista.cajaPais.setEditable(false);
         
         //cargo las aerolineas en un model
         DefaultListModel modelo = new DefaultListModel();
@@ -36,6 +39,7 @@ public class VerAeropuerto {
         }
         
         vista.lista.setModel(modelo);
+        //vista.lista.setEnabled(false);
     }
 
     private void oyentes() {
