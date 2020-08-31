@@ -110,6 +110,31 @@ public class AeropuertoModel extends ConexionBD {
         return aeropuerto;
     }
 
+    public static int getIdAeropuertoByNombre(String nombre){
+        Connection conexion = null;
+        int id=0;
+        try{
+            conexion = getConnection();
+            ps = conexion.prepareStatement("SELECT id FROM aeropuerto WHERE nombre =?");
+            ps.setString(1, nombre);
+            rs=ps.executeQuery();
+            
+            if(rs.next()){
+                id = rs.getInt("id");
+            }
+            ps.close();
+        }catch(SQLException ex){
+            System.err.println("SQL Error: "+ex);
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: "+ex);
+            }
+        }
+        
+        return id;
+    }
     public static boolean create(Aeropuerto aeropuerto) {
         Connection conexion = getConnection();
         boolean estado = true;
@@ -171,6 +196,41 @@ public class AeropuertoModel extends ConexionBD {
             
             int resultado = ps.executeUpdate();
             estado = (resultado>0);
+        }catch(SQLException ex){
+            System.err.println("SQL Error: "+ex);
+            estado = false;
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: "+ex);
+            }
+        }
+        return estado;
+    }
+    
+    public static boolean update(Aeropuerto aeropuerto, String nombre){
+        Connection conexion = null;
+        boolean estado = true;
+        try{
+            conexion = getConnection();
+            
+            ps = conexion.prepareStatement("UPDATE aeropuerto SET nombre=?,ciudad =?, pais=? where nombre =?");
+            ps.setString(1, aeropuerto.getNombre());
+            ps.setString(2, aeropuerto.getCiudad());
+            ps.setString(3, aeropuerto.getPais());
+            ps.setString(4, nombre);
+            
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                //ahora tengo que actualizar las aerolineas
+                
+                //borro las que estan y subo y las nuevas
+                ps = conexion.prepareStatement("DELETE FROM union_empresa_aeropuerto where idAeropuerto =?");
+            }else{
+                estado = false;
+            }
+            ps.close();
         }catch(SQLException ex){
             System.err.println("SQL Error: "+ex);
             estado = false;
