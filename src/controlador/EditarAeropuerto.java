@@ -1,5 +1,6 @@
 package controlador;
 
+import static gestor_aeropuertos.Gestor_Aeropuertos.controlInicio;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -32,7 +33,6 @@ public class EditarAeropuerto {
 
     private void cargarAeropuerto() {
         Aeropuerto aeropuerto = AeropuertoModel.getAeropuertoByNombre(nombre);
-        System.out.println(aeropuerto.getCiudad());
 
         this.vista.cajaNombre.setText(nombre);
         this.vista.cajaCiudad.setText(aeropuerto.getCiudad());
@@ -83,7 +83,7 @@ public class EditarAeropuerto {
 
             JOptionPane.showMessageDialog(null, (AeropuertoModel.update(aeropuerto)) ? 
                     "Aeropuerto editado con exito":"Error al editar el aeropuerto");
-            
+            controlInicio.cargarAeropuertos();
             vista.dispose();
         });
     }
