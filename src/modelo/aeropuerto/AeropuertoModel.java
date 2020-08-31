@@ -209,24 +209,36 @@ public class AeropuertoModel extends ConexionBD {
         return estado;
     }
     
-    public static boolean update(Aeropuerto aeropuerto, String nombre){
+    public static boolean update(Aeropuerto aeropuerto){
         Connection conexion = null;
         boolean estado = true;
         try{
             conexion = getConnection();
             
-            ps = conexion.prepareStatement("UPDATE aeropuerto SET nombre=?,ciudad =?, pais=? where nombre =?");
+            ps = conexion.prepareStatement("UPDATE aeropuerto SET nombre=?,ciudad =?, pais=? where id =?");
             ps.setString(1, aeropuerto.getNombre());
             ps.setString(2, aeropuerto.getCiudad());
             ps.setString(3, aeropuerto.getPais());
-            ps.setString(4, nombre);
+            ps.setInt(4, aeropuerto.getId());
             
             int res = ps.executeUpdate();
             if (res > 0) {
                 //ahora tengo que actualizar las aerolineas
                 
-                //borro las que estan y subo y las nuevas
-                ps = conexion.prepareStatement("DELETE FROM union_empresa_aeropuerto where idAeropuerto =?");
+                //borro las viejas 
+                ps = conexion.prepareStatement("DELETE FROM union_empresa_aeropuerto WHERE idAeropuerto = ?");
+                ps.setInt(1, aeropuerto.getId());
+                estado = (ps.executeUpdate())>0;
+                
+                //inserto las nuevas
+                for(AeroLinea a:aeropuerto.getLineas()){
+                    ps = conexion.prepareStatement("INSERT INTO union_empresa_aeropuerto (idEmpresa,idAeropuerto) VALUES (?,?)");
+                    ps.setInt(1, a.getId());
+                    ps.setInt(2, aeropuerto.getId());
+                    
+                    estado = (ps.executeUpdate())>0;
+                    
+                }
             }else{
                 estado = false;
             }
