@@ -146,6 +146,6 @@ public class AeroLineas extends javax.swing.JDialog {
     public javax.swing.JButton bVerVuelos;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lista;
+    public javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables
 }
