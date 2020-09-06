@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package vista.aeropuerto;
 
 /**
  *
@@ -34,13 +34,13 @@ public class Inicio extends javax.swing.JFrame {
         bEditar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
         bAgregar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        barraMenu = new javax.swing.JMenuBar();
         menuVer = new javax.swing.JMenu();
         menuAero = new javax.swing.JMenuItem();
         menuVuelos = new javax.swing.JMenuItem();
         menuPasajeros = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        menuBuscarVuelos = new javax.swing.JMenu();
+        menuAyuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,15 +82,15 @@ public class Inicio extends javax.swing.JFrame {
         menuPasajeros.setText("Pasajeros");
         menuVer.add(menuPasajeros);
 
-        jMenuBar1.add(menuVer);
+        barraMenu.add(menuVer);
 
-        jMenu2.setText("Buscar vuelos");
-        jMenuBar1.add(jMenu2);
+        menuBuscarVuelos.setText("Buscar vuelos");
+        barraMenu.add(menuBuscarVuelos);
 
-        jMenu3.setText("Ayuda");
-        jMenuBar1.add(jMenu3);
+        menuAyuda.setText("Ayuda");
+        barraMenu.add(menuAyuda);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,12 +176,12 @@ public class Inicio extends javax.swing.JFrame {
     public javax.swing.JButton bDatos;
     public javax.swing.JButton bEditar;
     public javax.swing.JButton bEliminar;
+    public javax.swing.JMenuBar barraMenu;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JMenu jMenu2;
-    public javax.swing.JMenu jMenu3;
-    public javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JMenuItem menuAero;
+    public javax.swing.JMenu menuAyuda;
+    public javax.swing.JMenu menuBuscarVuelos;
     public javax.swing.JMenuItem menuPasajeros;
     public javax.swing.JMenu menuVer;
     public javax.swing.JMenuItem menuVuelos;

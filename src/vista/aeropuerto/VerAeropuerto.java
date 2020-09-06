@@ -1,5 +1,5 @@
 
-package vista;
+package vista.aeropuerto;
 
 public class VerAeropuerto extends javax.swing.JDialog {
 
