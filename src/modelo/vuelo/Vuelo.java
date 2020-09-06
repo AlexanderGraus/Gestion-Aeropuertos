@@ -6,7 +6,9 @@ import modelo.Pasajero;
 
 public class Vuelo {
 
-    private String id;
+    private int id;
+    
+    private String nombre;
 
     private String ciudadOrigen;
 
@@ -19,7 +21,7 @@ public class Vuelo {
     public Vuelo() {
     }
 
-    public Vuelo(String id, String ciudadOrigen, String ciudadDestino, float precio,int idEmpresa) {
+    public Vuelo(int id,String nombre, String ciudadOrigen, String ciudadDestino, float precio,int idEmpresa) {
         this.id = id;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
@@ -28,10 +30,14 @@ public class Vuelo {
       
     }
     
-    public String getId() {
+    public int getId() {
         return id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+    
     public String getCiudadOrigen() {
         return ciudadOrigen;
     }
@@ -43,11 +49,18 @@ public class Vuelo {
     public float getPrecio() {
         return precio;
     }
+    public int getIdEmpresa(){
+        return idEmpresa;
+    }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public void setCiudadOrigen(String ciudadOrigen) {
         this.ciudadOrigen = ciudadOrigen;
     }
