@@ -1,7 +1,7 @@
 package controlador.aeropuerto;
 
+import controlador.aerolinea.AeroLineas;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
@@ -49,7 +49,7 @@ public class InicioController {
     private void oyentes() {
         /*Menu*/
         vistaInicio.menuAero.addActionListener((ActionEvent ae) ->{
-            
+            new AeroLineas(vistaInicio);
         });
         
         vistaInicio.bAgregar.addActionListener((ActionEvent ae) -> {
