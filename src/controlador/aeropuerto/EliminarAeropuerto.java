@@ -1,5 +1,5 @@
 
-package controlador;
+package controlador.aeropuerto;
 
 import static gestor_aeropuertos.Gestor_Aeropuertos.controlInicio;
 import javax.swing.JOptionPane;

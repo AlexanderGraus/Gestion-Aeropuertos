@@ -1,4 +1,4 @@
-package controlador;
+package controlador.aeropuerto;
 import static gestor_aeropuertos.Gestor_Aeropuertos.controlInicio;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
@@ -7,14 +7,14 @@ import modelo.aerolinea.AeroLinea;
 import modelo.aerolinea.AeroLineaModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
-import vista.Inicio;
+import vista.aeropuerto.Inicio;
 
 public class AgregarAeropuerto {
 
-    private vista.AgregarAeropuerto vista;
+    private vista.aeropuerto.AgregarAeropuerto vista;
     
     public AgregarAeropuerto(Inicio vistaInicio) {
-        vista = new vista.AgregarAeropuerto(vistaInicio, true);
+        vista = new vista.aeropuerto.AgregarAeropuerto(vistaInicio, true);
         cargarAeroLineas();
         oyentes();
         vista.setVisible(true);

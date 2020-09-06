@@ -3,7 +3,7 @@ Proyecto para la gestion de multiples aeropuertos.
  */
 package gestor_aeropuertos;
 
-import controlador.InicioController;
+import controlador.aeropuerto.InicioController;
 
 /**
  *

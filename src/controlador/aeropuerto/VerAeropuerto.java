@@ -1,19 +1,19 @@
-package controlador;
+package controlador.aeropuerto;
 
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultListModel;
 import modelo.aerolinea.AeroLinea;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
-import vista.Inicio;
+import vista.aeropuerto.Inicio;
 
 
 public class VerAeropuerto {
     
-    private vista.VerAeropuerto vista;
+    private vista.aeropuerto.VerAeropuerto vista;
     private String nombre;
     public VerAeropuerto(Inicio vistaInicio, String nombre){
-        this.vista = new vista.VerAeropuerto(vistaInicio,true);
+        this.vista = new vista.aeropuerto.VerAeropuerto(vistaInicio,true);
         this.nombre = nombre;
         cargarAeropuerto();
         oyentes();

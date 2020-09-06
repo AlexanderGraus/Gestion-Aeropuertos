@@ -1,4 +1,4 @@
-package controlador;
+package controlador.aeropuerto;
 
 import static gestor_aeropuertos.Gestor_Aeropuertos.controlInicio;
 import java.awt.event.ActionEvent;
@@ -8,16 +8,16 @@ import modelo.aerolinea.AeroLinea;
 import modelo.aerolinea.AeroLineaModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
-import vista.Inicio;
+import vista.aeropuerto.Inicio;
 
 public class EditarAeropuerto {
 
-    private vista.AgregarAeropuerto vista;
+    private vista.aeropuerto.AgregarAeropuerto vista;
     private String nombre;
 
     public EditarAeropuerto(Inicio vistaInicio, String nombre) {
         //voy a usar la misma vista que AgregarAeropuerto pero le cambio los titulos
-        this.vista = new vista.AgregarAeropuerto(vistaInicio, true);
+        this.vista = new vista.aeropuerto.AgregarAeropuerto(vistaInicio, true);
         this.vista.etiqTitulo.setText("Editar Aeropuerto");
         this.vista.bAgregar.setText("Editar");
         

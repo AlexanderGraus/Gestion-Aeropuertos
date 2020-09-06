@@ -1,11 +1,11 @@
-package controlador;
+package controlador.aeropuerto;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.aeropuerto.Aeropuerto;
 import modelo.aeropuerto.AeropuertoModel;
-import vista.Inicio;
+import vista.aeropuerto.Inicio;
 
 public class InicioController {
 
@@ -47,6 +47,11 @@ public class InicioController {
     }
 
     private void oyentes() {
+        /*Menu*/
+        vistaInicio.menuAero.addActionListener((ActionEvent ae) ->{
+            
+        });
+        
         vistaInicio.bAgregar.addActionListener((ActionEvent ae) -> {
             new AgregarAeropuerto(vistaInicio);
         });
@@ -71,6 +76,6 @@ public class InicioController {
             new EliminarAeropuerto(nombre);
             
         });
-
+        
     }
 }
