@@ -18,7 +18,7 @@ public class AeroLineas {
         vista.setVisible(true);
     }
     
-    private void cargarAerolineas(){
+    protected void cargarAerolineas(){
         AeroLinea lineas[] = AeroLineaModel.getAeroLineas();
         
         DefaultListModel modelo = new DefaultListModel();
@@ -32,6 +32,8 @@ public class AeroLineas {
     private void oyentes() {
         vista.bAgregar.addActionListener((ActionEvent ae) -> {
             new AgregarAeroLinea(vistaInicio);
+            //recargo la lista de aerolineas despues de haber hecho la insercion
+            cargarAerolineas();
         });
     }
 }
