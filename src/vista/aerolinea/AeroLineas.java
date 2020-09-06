@@ -5,18 +5,17 @@
  */
 package vista.aerolinea;
 
-import vista.aeropuerto.*;
-
 /**
  *
  * @author ale61
  */
-public class AeroLineas extends javax.swing.JFrame {
+public class AeroLineas extends javax.swing.JDialog {
 
     /**
-     * Creates new form Inicio
+     * Creates new form AeroLineas
      */
-    public AeroLineas() {
+    public AeroLineas(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -31,68 +30,31 @@ public class AeroLineas extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAero = new javax.swing.JTable();
-        bDatos = new javax.swing.JButton();
+        lista = new javax.swing.JList<>();
+        bVerVuelos = new javax.swing.JButton();
+        bAgregar = new javax.swing.JButton();
         bEditar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
-        bAgregar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menuVer = new javax.swing.JMenu();
-        menuAero = new javax.swing.JMenuItem();
-        menuVuelos = new javax.swing.JMenuItem();
-        menuPasajeros = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
-        jLabel1.setText("Aeropuertos ingresados:");
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setText("Aerolineas ingresadas:");
 
-        tablaAero.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tablaAero.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre del Aeropueto", "Pais", "Ciudad"
-            }
-        ));
-        tablaAero.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tablaAero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(tablaAero);
+        lista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lista);
 
-        bDatos.setText("Ver datos");
+        bVerVuelos.setText("Ver Vuelos");
+
+        bAgregar.setText("Agregar");
 
         bEditar.setText("Editar");
 
         bEliminar.setText("Eliminar");
-
-        bAgregar.setText("Agregar");
-
-        menuVer.setText("Ver");
-
-        menuAero.setText("Aerolineas");
-        menuVer.add(menuAero);
-
-        menuVuelos.setText("Vuelos");
-        menuVer.add(menuVuelos);
-
-        menuPasajeros.setText("Pasajeros");
-        menuVer.add(menuPasajeros);
-
-        jMenuBar1.add(menuVer);
-
-        jMenu2.setText("Buscar vuelos");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Ayuda");
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,37 +63,35 @@ public class AeroLineas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel1))
+                        .addGap(74, 74, 74)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bDatos)
-                                .addGap(59, 59, 59)
-                                .addComponent(bAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bEditar)
-                                .addGap(74, 74, 74)
-                                .addComponent(bEliminar)
-                                .addGap(65, 65, 65)))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(bVerVuelos)
+                        .addGap(18, 18, 18)
+                        .addComponent(bAgregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(bEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bEliminar)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bDatos)
+                    .addComponent(bVerVuelos)
+                    .addComponent(bAgregar)
                     .addComponent(bEditar)
-                    .addComponent(bEliminar)
-                    .addComponent(bAgregar))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(bEliminar))
+                .addContainerGap())
         );
 
         pack();
@@ -163,36 +123,29 @@ public class AeroLineas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AeroLineas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AeroLineas().setVisible(true);
+                AeroLineas dialog = new AeroLineas(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton bAgregar;
-    public javax.swing.JButton bDatos;
     public javax.swing.JButton bEditar;
     public javax.swing.JButton bEliminar;
-    private javax.swing.JLabel jLabel1;
-    public javax.swing.JMenu jMenu2;
-    public javax.swing.JMenu jMenu3;
-    public javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JMenuItem menuAero;
-    public javax.swing.JMenuItem menuPasajeros;
-    public javax.swing.JMenu menuVer;
-    public javax.swing.JMenuItem menuVuelos;
-    public javax.swing.JTable tablaAero;
+    public javax.swing.JButton bVerVuelos;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables
 }
