@@ -104,4 +104,27 @@ public class AeroLineaModel {
         }
         return estado;
     }
+    
+    public static boolean delete(AeroLinea aerolinea){
+        Connection conexion = null;
+        boolean estado = true;
+        try{
+            conexion = getConnection();
+            ps = conexion.prepareStatement("DELETE FROM empresa WHERE id = ?");
+            ps.setInt(1, aerolinea.getId());
+            
+            estado = ps.executeUpdate() > 0;
+
+        }catch(SQLException ex){
+            System.err.println("SQL Error: "+ex);
+            estado = false;
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: "+ex);
+            }
+        }
+        return estado;
+    }
 }
