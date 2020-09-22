@@ -35,5 +35,10 @@ public class AeroLineas {
             //recargo la lista de aerolineas despues de haber hecho la insercion
             cargarAerolineas();
         });
+        vista.bEditar.addActionListener((ActionEvent ae) -> {
+            new EditarAeroLinea(vistaInicio);
+            //recargo la lista de aerolineas despues de haber hecho la modificacion
+            cargarAerolineas();
+        });
     }
 }
