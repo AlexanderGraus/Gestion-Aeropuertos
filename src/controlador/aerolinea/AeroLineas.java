@@ -43,5 +43,14 @@ public class AeroLineas {
             //recargo la lista de aerolineas despues de haber hecho la modificacion
             cargarAerolineas();
         });
+        
+        vista.bEliminar.addActionListener((ActionEvent ae) -> {
+            //obtengo la aerolinea seleccionada
+            AeroLinea linea = (AeroLinea)vista.lista.getSelectedValuesList().toArray()[0];
+            
+            new EliminarAeroLinea(linea);
+            //recargo la lista de aerolineas despues de haber hecho la modificacion
+            cargarAerolineas();
+        });
     }
 }
