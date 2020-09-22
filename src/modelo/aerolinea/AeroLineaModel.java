@@ -78,4 +78,30 @@ public class AeroLineaModel {
         }
         return estado;
     }
+    
+    public static boolean update(AeroLinea aerolinea){
+        Connection conexion = null;
+        boolean estado = true;
+        try{
+            conexion = getConnection();
+            
+            ps = conexion.prepareStatement("UPDATE empresa SET nombre=? where id =?");
+            ps.setString(1, aerolinea.getNombre());
+            ps.setInt(2, aerolinea.getId());
+            
+            estado = ps.executeUpdate() > 0;
+            
+            ps.close();
+        }catch(SQLException ex){
+            System.err.println("SQL Error: "+ex);
+            estado = false;
+        }finally{
+            try {
+                conexion.close();
+            } catch (SQLException ex) {
+                System.err.println("SQL Error: "+ex);
+            }
+        }
+        return estado;
+    }
 }
