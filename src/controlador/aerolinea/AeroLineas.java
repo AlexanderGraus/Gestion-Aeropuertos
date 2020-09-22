@@ -36,7 +36,10 @@ public class AeroLineas {
             cargarAerolineas();
         });
         vista.bEditar.addActionListener((ActionEvent ae) -> {
-            new EditarAeroLinea(vistaInicio);
+            //obtengo la aerolinea seleccionada
+            AeroLinea linea = (AeroLinea)vista.lista.getSelectedValuesList().toArray()[0];
+            
+            new EditarAeroLinea(vistaInicio,linea);
             //recargo la lista de aerolineas despues de haber hecho la modificacion
             cargarAerolineas();
         });
